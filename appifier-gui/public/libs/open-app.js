@@ -10,10 +10,6 @@ const openApp = (id, name) => {
       shell.openItem(appPath);
       break;
     }
-    case 'linux': {
-      exec(`gtk-launch appifier-${id}`);
-      break;
-    }
     case 'win32':
     default: {
       const shortcutPath = path.join(app.getPath('userData'), 'Apps', id, `${name}.exe`);

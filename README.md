@@ -2,62 +2,31 @@
 
 **Appifier** is an app + Node.js library + CLI which turns any website into Electron app.
 
-**CAUTION:** The project is no longer under development. Use **[WebCatalog Lite](https://github.com/quanglam2807/webcatalog)** or [Nativefier](https://github.com/jiahaog/nativefier) instead. If you'd like to take over the repository, feel free to [contact me](https://quang.im).
-
 ![Demo](demo.gif)
 
 > Old Git history prior to March 2018 is squashed. You can still find it [here](https://github.com/quanglam2807/appifier/tree/feb-26-full-history).
 
+### Development
 ## Requirements
-- macOS 10.9+, Windows 7+ or Linux.
+- macOS 10.9+, Windows 7+.
 - Node.js 8+.
 - Yarn
 
-## Usage
-To create a native desktop app for [duckduckgo.com](https://duckduckgo.com):
-
-### GUI (not recommended)
-Download & install Appifier GUI at https://github.com/quanglam2807/appifier/releases
-
-### Command Line
-Install: `npm install appifier -g` or `yarn global add appifier`
-
 ```bash
-appifier --id duckduckgo --name "DuckDuckGo" --url "https://duckduckgo.com" --icon ./icon.png
+# First, clone the project:
+git clone https://github.com/quanglam2807/juli.git
+cd appifier
+
+# install the dependencies
+yarn
+# build the code
+yarn build
+# To develop the template Electron app, run
+yarn lib:electron-dev
+# It'll automatically watch the files for changes and reload accordingly.
+# Still, if you modify files in the main process (./app/main),
+# you'll need to manually re-run the script.
+
+# To run all tests for Appifier GUI
+yarn run test
 ```
-
-### Programmatic API
-Install: `npm install appifier` or `yarn add appifier`
-
-```js
-const appifier = require('appifier');
-
-appifier.createAppAsync(
-  'duckduckgo',
-  'DuckDuckGo',
-  'https://duckduckgo.com',
-  path.resolve(__dirname, 'test', 'icon.png'),
-  path.resolve(__dirname, 'dist'),
-)
-  .then((destPath) => {
-    console.log(`App has been created at ${destPath}`);
-  })
-  .then((err) => {
-    console.log(err);
-  });
-```
-
----
-
-## How It Works
-A template Electron app is included in the `./appifier/app` folder. When the `appifier` command or programmatic API is executed, this folder is copied to a temporary directory with the appropriate parameters in a configuration file, and is packaged into an app with [electron-packager](https://github.com/electron-userland/electron-packager).
-
----
-
-## API Documentation
-See [API](API.md).
-
----
-
-## Development
-See [DEVELOPMENT](DEVELOPMENT.md).

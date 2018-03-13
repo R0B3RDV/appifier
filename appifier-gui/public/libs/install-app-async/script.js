@@ -70,23 +70,7 @@ downloadFileTempAsync(icon)
         return fs.move(originPath, destPath)
           .then(() => destPath);
       })
-      .then(destPath =>
-        fs.copy(iconPath, path.join(iconDirPath, `${id}.png`))
-          .then(() => {
-            if (process.platform === 'linux') {
-              const execPath = path.join(destPath, name);
-              const desktopFilePath = path.join(homePath, '.local', 'share', 'applications', `appifier-${id}.desktop`);
-              const desktopFileContent = `[Desktop Entry]
-            Name=${name}
-            Exec="${execPath}"
-            Icon=${path.join(iconDirPath, `${id}.png`)}
-            Type=Application`;
-
-              return fs.outputFile(desktopFilePath, desktopFileContent);
-            }
-
-            return null;
-          }))
+      .then(() => fs.copy(iconPath, path.join(iconDirPath, `${id}.png`)))
       .then(() => {
         process.exit(0);
       }))

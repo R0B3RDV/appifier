@@ -58,7 +58,6 @@ const createAppAsync = (id, name, url, inputIcon, out) => {
           resourcesPath = path.join(destPath, 'Contents', 'Resources');
           break;
         case 'win32':
-        case 'linux':
           resourcesPath = path.join(destPath, 'resources');
           break;
         default:
@@ -83,14 +82,7 @@ const createAppAsync = (id, name, url, inputIcon, out) => {
         })
         .then(() => {
           if (inputIcon) {
-            return fs.copy(inputIcon, path.join(resourcesPath, 'icon.png'))
-              .then(() => {
-                // icon png for BrowserWindow's nativeImage
-                if (process.platform === 'linux') {
-                  return fs.copy(inputIcon, path.join(appAsarUnpackedPath, 'icon.png'));
-                }
-                return null;
-              });
+            return fs.copy(inputIcon, path.join(resourcesPath, 'icon.png'));
           }
 
           return null;
@@ -100,6 +92,4 @@ const createAppAsync = (id, name, url, inputIcon, out) => {
     .catch(err => Promise.reject(err));
 };
 
-module.exports = {
-  createAppAsync,
-};
+module.exports = createAppAsync;

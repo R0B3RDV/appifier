@@ -79,7 +79,6 @@ const createWindow = () => {
     minHeight: 320,
     titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
     autoHideMenuBar,
-    icon: process.platform === 'linux' ? nativeImage.createFromPath(path.join(app.getAppPath(), 'icon.png').replace('app.asar', 'app.asar.unpacked')) : null,
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, 'preload.js'),

@@ -52,43 +52,6 @@ const scanInstalledAsync = () =>
             })
             .then(() => installedApps);
         }
-        case 'linux': {
-          return fs.pathExists(allAppPath)
-            .then((allAppPathExists) => {
-              if (allAppPathExists) {
-                return fs.readdir(allAppPath)
-                  .then((files) => {
-                    const promises = [];
-
-                    files.forEach((fileName) => {
-                      const packageJsonPath = path.join(allAppPath, fileName, 'resources', 'app.asar.unpacked', 'package.json');
-                      const iconPath = path.join(allAppPath, fileName, 'resources', 'icon.png');
-
-                      promises.push(fs.pathExists(packageJsonPath)
-                        .then((exists) => {
-                          if (exists) {
-                            return fs.readJson(packageJsonPath)
-                              .then((packageInfo) => {
-                                const appInfo = Object.assign({}, packageInfo.webApp, {
-                                  moleculeVersion: packageInfo.version,
-                                  icon: fs.pathExistsSync(iconPath) ? iconPath : null,
-                                });
-
-                                installedApps.push(appInfo);
-                              });
-                          }
-                          return null;
-                        }));
-                    });
-
-                    return Promise.all(promises);
-                  });
-              }
-
-              return null;
-            })
-            .then(() => installedApps);
-        }
         case 'win32':
         default: {
           return fs.pathExists(allAppPath)

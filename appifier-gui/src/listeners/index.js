@@ -34,7 +34,6 @@ const loadListeners = (store) => {
   });
 
   ipcRenderer.on('set-updater-status', (e, status, info) => {
-    if (window.platform === 'linux') return;
     store.dispatch(setUpdaterStatus(status, info || {}));
   });
 

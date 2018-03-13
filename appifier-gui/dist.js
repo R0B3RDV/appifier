@@ -17,10 +17,6 @@ Promise.resolve()
           targets = Platform.MAC.createTarget(['zip']);
           break;
         }
-        case 'linux': {
-          targets = Platform.LINUX.createTarget(['deb', 'rpm', 'pacman'], Arch.x64);
-          break;
-        }
         case 'win32':
         default: {
           targets = Platform.WINDOWS.createTarget(['nsis'], Arch.x64);
@@ -32,24 +28,12 @@ Promise.resolve()
           targets = Platform.MAC.createTarget(['dir']);
           break;
         }
-        case 'linux': {
-          targets = Platform.LINUX.createTarget(['dir'], Arch.x64);
-          break;
-        }
         case 'win32':
         default: {
           targets = Platform.WINDOWS.createTarget(['dir'], Arch.x64);
         }
       }
     }
-
-    // const asarUnpack = [
-    // ...asarUnpackedMainDependencies.map(name => `node_modules/${name}/**/*`),
-    // 'build/libs/install-app-async/script.js',
-    // ];
-
-    // console.log('Unpack these files from asar: ');
-    // asarUnpack.forEach(name => console.log(name));
 
     const opts = {
       targets,
@@ -58,10 +42,6 @@ Promise.resolve()
         asar: false,
         directories: {
           buildResources: 'build-resources',
-        },
-        linux: {
-          category: 'Utility',
-          packageCategory: 'utils',
         },
         mac: {
           category: 'public.app-category.utilities',
@@ -83,17 +63,6 @@ Promise.resolve()
               'app',
             );
 
-          const sourceNodeModulesPath = path.join(
-            __dirname,
-            'node_modules', 'appifier', 'app', 'node_modules',
-          );
-
-          const destNodeModulesPath = path.join(
-            resourcesAppPath,
-            'node_modules',
-            'appifier', 'app', 'node_modules',
-          );
-
           const sourceElectronIconPath = path.join(
             __dirname,
             'electron-icon.png',
@@ -104,35 +73,9 @@ Promise.resolve()
             'electron-icon.png',
           );
 
-
-          const widevineLibDir = path.join(
-            destNodeModulesPath,
-            'electron-widevinecdm', 'widevine',
-          );
-
           console.log('Copying additional files...');
 
-          return fs.copy(sourceElectronIconPath, destElectronIconPath)
-            .then(() => fs.copy(sourceNodeModulesPath, destNodeModulesPath))
-            .then(() => {
-              if (process.platform === 'win32') return null;
-
-              return fs.readdir(widevineLibDir)
-                .then((dirs) => {
-                  const acceptedName = `${process.platform}_${process.arch}`;
-
-                  const p = dirs.map((dir) => {
-                    if (dir !== acceptedName) {
-                      console.log(`Removing node_modules/electron-widevinecdm/widevine/${dir}`);
-                      return fs.remove(path.join(widevineLibDir, dir));
-                    }
-
-                    return null;
-                  });
-
-                  return Promise.all(p);
-                });
-            });
+          return fs.copy(sourceElectronIconPath, destElectronIconPath);
         },
       },
     };

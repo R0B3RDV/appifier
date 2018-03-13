@@ -10,12 +10,10 @@ chai.use(chaiAsPromised);
 
 const getElectronPath = () => {
   if (process.platform === 'win32') {
-    return path.resolve(__dirname, '../../dist/win-unpacked/Appifier.exe');
-  } else if (process.platform === 'darwin') {
-    return path.resolve(__dirname, '../../dist/mac/Appifier.app/Contents/MacOS/Appifier');
+    return path.resolve(__dirname, '../../dist/win-unpacked/Juli.exe');
   }
 
-  return path.resolve(__dirname, '../../dist/linux-unpacked/appifier');
+  return path.resolve(__dirname, '../../dist/mac/Juli.app/Contents/MacOS/Juli');
 };
 
 const harness = (name, fn, args) => {

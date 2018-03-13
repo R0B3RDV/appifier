@@ -184,26 +184,6 @@ function createMenu() {
     });
   }
 
-  if (process.platform === 'linux') {
-    template[0].submenu.push({ role: 'separator' });
-    template[0].submenu.push({
-      label: 'Preferences...',
-      accelerator: 'Ctrl+P',
-      click: () => sendMessageToWindow('open-preferences-dialog'),
-    });
-
-    template.splice(4, 0, {
-      label: 'Tools',
-      submenu: [
-        {
-          label: 'Clear Browsing Data...',
-          accelerator: 'Ctrl+Shift+Delete',
-          click: () => sendMessageToWindow('open-clear-browsing-data-dialog'),
-        },
-      ],
-    });
-  }
-
   if (process.platform === 'win32') {
     template.splice(4, 0, {
       label: 'Tools',

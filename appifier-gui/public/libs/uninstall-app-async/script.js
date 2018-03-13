@@ -19,15 +19,6 @@ const uninstallAppAsync = () => {
       p.push(fs.remove(appPath));
       break;
     }
-    case 'linux': {
-      const desktopFilePath = path.join(homePath, '.local', 'share', 'applications', `appifier-${appId}.desktop`);
-      p.push(fs.remove(desktopFilePath));
-
-      const appPath = path.join(allAppPath, appId);
-      p.push(fs.remove(appPath));
-
-      break;
-    }
     case 'win32':
     default: {
       const appPath = path.join(allAppPath, `${appId}`);
