@@ -1,6 +1,6 @@
-# Appifier [![npm version](https://badge.fury.io/js/appifier.svg)](https://badge.fury.io/js/appifier) [![Travis Build Status](https://travis-ci.org/quanglam2807/appifier.svg?branch=master)](https://travis-ci.org/quanglam2807/appifier) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/quanglam2807/appifier?branch=master&svg=true)](https://ci.appveyor.com/project/quanglam2807/appifier/branch/master)
+# Juli [![Travis Build Status](https://travis-ci.org/quanglam2807/appifier.svg?branch=master)](https://travis-ci.org/quanglam2807/appifier) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/quanglam2807/appifier?branch=master&svg=true)](https://ci.appveyor.com/project/quanglam2807/appifier/branch/master)
 
-**Appifier** is an app + Node.js library + CLI which turns any website into Electron app.
+**Juli** is an app + Node.js library + CLI which turns any website into Electron app.
 
 ![Demo](demo.gif)
 

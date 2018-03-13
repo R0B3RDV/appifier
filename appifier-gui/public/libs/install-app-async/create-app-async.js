@@ -6,7 +6,7 @@ const tmp = require('tmp');
 const createIconAsync = require('./create-icon-async');
 
 const createAppAsync = (id, name, url, inputIcon, out) => {
-  const appDir = path.resolve(__dirname, '..', 'app').replace('app.asar', 'app.asar.unpacked');
+  const appDir = path.resolve(__dirname, '..', '..', 'template').replace('app.asar', 'app.asar.unpacked');
   let tmpDir;
 
   return Promise.resolve()
@@ -64,7 +64,6 @@ const createAppAsync = (id, name, url, inputIcon, out) => {
           return Promise.reject(new Error('Unknown platform'));
       }
 
-      const appAsarUnpackedPath = path.join(resourcesPath, 'app.asar.unpacked');
       const packageJsonPath = path.join(resourcesPath, 'app.asar.unpacked', 'package.json');
 
       return fs.readJson(packageJsonPath)

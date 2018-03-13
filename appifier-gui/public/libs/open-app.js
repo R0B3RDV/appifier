@@ -1,7 +1,6 @@
 const os = require('os');
 const { app, shell } = require('electron');
 const path = require('path');
-const { exec } = require('child_process');
 
 const openApp = (id, name) => {
   switch (os.platform()) {

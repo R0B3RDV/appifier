@@ -1,9 +1,10 @@
 const { https } = require('follow-redirects');
 const argv = require('yargs-parser')(process.argv.slice(1));
-const appifier = require('appifier');
 const fs = require('fs-extra');
 const isUrl = require('is-url');
 const path = require('path');
+
+const createAppAsync = require('./create-app-async');
 
 const {
   allAppPath,
@@ -49,7 +50,7 @@ const downloadFileTempAsync = (filePath) => {
 
 downloadFileTempAsync(icon)
   .then(iconPath =>
-    appifier.createAppAsync(
+    createAppAsync(
       id,
       name,
       url,
