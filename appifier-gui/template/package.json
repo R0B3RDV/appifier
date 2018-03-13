@@ -38,8 +38,5 @@
     "url": "https://open.spotify.com",
     "name": "Facebook Messenger"
   },
-  "private": true,
-  "optionalDependencies": {
-    "electron-widevinecdm": "6.0.1"
-  }
+  "private": true
 }

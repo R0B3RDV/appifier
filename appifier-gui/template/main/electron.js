@@ -2,7 +2,6 @@
 const {
   app,
   BrowserWindow,
-  nativeImage,
   session,
 } = require('electron');
 const path = require('path');
@@ -30,12 +29,6 @@ const isSecondInstance = app.makeSingleInstance(() => {
 
 if (isSecondInstance) {
   app.exit();
-}
-
-// load widevinecdm
-if (process.platform !== 'win32') {
-  const widevine = require('electron-widevinecdm'); // eslint-disable-line
-  widevine.load(app);
 }
 
 loadListeners();
