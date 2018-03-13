@@ -6,7 +6,7 @@ const tmp = require('tmp');
 const createIconAsync = require('./create-icon-async');
 
 const createAppAsync = (id, name, url, inputIcon, out) => {
-  const appDir = path.resolve(__dirname, '..', '..', 'template').replace('app.asar', 'app.asar.unpacked');
+  const appDir = path.resolve(__dirname, '..', '..', '..', 'template').replace('app.asar', 'app.asar.unpacked');
   let tmpDir;
 
   return Promise.resolve()
@@ -52,17 +52,7 @@ const createAppAsync = (id, name, url, inputIcon, out) => {
         destPath = appPaths[0]; // eslint-disable-line
       }
 
-      let resourcesPath;
-      switch (process.platform) {
-        case 'darwin':
-          resourcesPath = path.join(destPath, 'Contents', 'Resources');
-          break;
-        case 'win32':
-          resourcesPath = path.join(destPath, 'resources');
-          break;
-        default:
-          return Promise.reject(new Error('Unknown platform'));
-      }
+      const resourcesPath = path.join(destPath, 'Contents', 'Resources');
 
       const packageJsonPath = path.join(resourcesPath, 'app.asar.unpacked', 'package.json');
 

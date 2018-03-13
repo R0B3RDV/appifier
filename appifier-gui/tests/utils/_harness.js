@@ -8,13 +8,7 @@ const path = require('path');
 chai.should();
 chai.use(chaiAsPromised);
 
-const getElectronPath = () => {
-  if (process.platform === 'win32') {
-    return path.resolve(__dirname, '../../dist/win-unpacked/Juli.exe');
-  }
-
-  return path.resolve(__dirname, '../../dist/mac/Juli.app/Contents/MacOS/Juli');
-};
+const getElectronPath = () => path.resolve(__dirname, '../../dist/mac/Appifier.app/Contents/MacOS/Appifier');
 
 const harness = (name, fn, args) => {
   describe('When Appifier GUI launches', function describeWrap() {

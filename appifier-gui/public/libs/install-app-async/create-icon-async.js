@@ -4,21 +4,13 @@ const Jimp = require('jimp');
 const path = require('path');
 const readChunk = require('read-chunk');
 
-const getExpectedIconFileExt = () => {
-  switch (process.platform) {
-    case 'darwin': return 'icns';
-    case 'win32': return 'ico';
-    default: return 'png';
-  }
-};
-
 const createIconAsync = (inputPath, outputDirPath) => {
   const buffer = readChunk.sync(inputPath, 0, 4100);
 
   const type = fileType(buffer);
   const inputFormat = type.ext;
 
-  const expectedFormat = getExpectedIconFileExt();
+  const expectedFormat = 'icns';
 
   if (inputFormat !== 'png') {
     return Promise.reject(new Error('Input format is not supported.'));

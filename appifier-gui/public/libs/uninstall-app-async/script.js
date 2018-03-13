@@ -1,4 +1,3 @@
-const os = require('os');
 const path = require('path');
 const argv = require('yargs-parser')(process.argv.slice(1));
 const fs = require('fs-extra');
@@ -7,30 +6,14 @@ const {
   allAppPath,
   appId,
   appName,
-  desktopPath,
   homePath,
 } = argv;
 
 const uninstallAppAsync = () => {
   const p = [];
-  switch (os.platform()) {
-    case 'darwin': {
-      const appPath = path.join(allAppPath, `${appName}.app`);
-      p.push(fs.remove(appPath));
-      break;
-    }
-    case 'win32':
-    default: {
-      const appPath = path.join(allAppPath, `${appId}`);
-      p.push(fs.remove(appPath));
 
-      const desktopFilePath = path.join(desktopPath, `${appName}.lnk`);
-      p.push(fs.remove(desktopFilePath));
-
-      const startMenuShortcutPath = path.join(homePath, 'AppData', 'Roaming', 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Appifier Apps', `${appName}.lnk`);
-      p.push(fs.remove(startMenuShortcutPath));
-    }
-  }
+  const appPath = path.join(allAppPath, `${appName}.app`);
+  p.push(fs.remove(appPath));
 
   const pngIconPath = path.join(homePath, '.appifier', 'icons', `${appId}.png`);
   p.push(fs.remove(pngIconPath));

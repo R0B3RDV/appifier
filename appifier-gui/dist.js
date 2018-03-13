@@ -3,40 +3,14 @@ const path = require('path');
 const fs = require('fs-extra');
 const builder = require('electron-builder');
 
-const { Platform, Arch } = builder;
+const { Platform } = builder;
 
 console.log(`Machine: ${process.platform}`);
 
 Promise.resolve()
   .then(() => {
-    let targets;
-
-    if (process.env.NODE_ENV === 'production') {
-      switch (process.platform) {
-        case 'darwin': {
-          targets = Platform.MAC.createTarget(['zip']);
-          break;
-        }
-        case 'win32':
-        default: {
-          targets = Platform.WINDOWS.createTarget(['nsis'], Arch.x64);
-        }
-      }
-    } else {
-      switch (process.platform) {
-        case 'darwin': {
-          targets = Platform.MAC.createTarget(['dir']);
-          break;
-        }
-        case 'win32':
-        default: {
-          targets = Platform.WINDOWS.createTarget(['dir'], Arch.x64);
-        }
-      }
-    }
-
     const opts = {
-      targets,
+      targets: Platform.MAC.createTarget(),
       config: {
         appId: 'com.appifier.app',
         asar: false,
